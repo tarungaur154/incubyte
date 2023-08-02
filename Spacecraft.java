@@ -4,18 +4,18 @@ public class Spacecraft {
     private int horPos, verPos, pos3D;
     private char facing;
 
-    public Spacecraft() {
+    public Spacecraft(char initialDirection) {
         this.horPos = 0;
         this.verPos = 0;
         this.pos3D = 0;
-        this.facing = 'N';
+        this.facing = Character.toUpperCase(initialDirection);
     }
 
     public void moveForward() {
         if (facing == 'N') {
             verPos++;
         } else if (facing == 'S') {
-            verPos--;
+            verPos++;
         } else if (facing == 'E') {
             horPos++;
         } else if (facing == 'W') {
@@ -31,7 +31,7 @@ public class Spacecraft {
         if (facing == 'N') {
             verPos--;
         } else if (facing == 'S') {
-            verPos++;
+            verPos--;
         } else if (facing == 'E') {
             horPos--;
         } else if (facing == 'W') {
@@ -93,14 +93,17 @@ public class Spacecraft {
     }
 
     public static void main(String[] args) {
-        Spacecraft spacecraft = new Spacecraft();
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the initial direction (N, S, E, W, U, D): ");
+        char initialDirection = scanner.next().charAt(0);
+
+        Spacecraft spacecraft = new Spacecraft(initialDirection);
         String command;
 
         while (true) {
             spacecraft.currPos();
             System.out.print("Enter the next command (f, b, l, r, u, d) or 'q' to quit: ");
-            command = scanner.nextLine();
+            command = scanner.next();
 
             if (command.equals("q")) {
                 break;
